@@ -32,7 +32,7 @@ INSERT INTO characters (class, hp, attack, xp)
 VALUES ("Archer", 100, 45, 3);
 
 INSERT INTO characters (class, hp, attack, xp)
-VALUES ("Warrior", 100, 65, 2);
+VALUES ("Mage", 100, 65, 2);
 
 
 
