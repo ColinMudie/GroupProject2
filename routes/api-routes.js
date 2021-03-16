@@ -22,10 +22,50 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password
     })
+      .then(result => {
+        db.Character.bulkCreate([
+          {
+            class: "Warrior",
+            hp: 100,
+            attack: 75,
+            xp: 0,
+            lvl: 1,
+            UserId: result.id
+          },
+          {
+            class: "Huntress",
+            hp: 100,
+            attack: 85,
+            xp: 0,
+            lvl: 1,
+            UserId: result.id
+          },
+          {
+            class: "Archer",
+            hp: 100,
+            attack: 45,
+            xp: 0,
+            lvl: 1,
+            UserId: result.id
+          },
+          {
+            class: "Mage",
+            hp: 100,
+            attack: 60,
+            xp: 0,
+            lvl: 1,
+            UserId: result.id
+          }
+        ]);
+      })
       .then(() => {
+        console.log("created a new user");
         res.redirect(307, "/api/login");
+        // res.render("members", { title: "Member" });
       })
       .catch(err => {
+        console.log("error here");
+        console.log(err);
         res.status(401).json(err);
       });
   });
@@ -33,7 +73,7 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/");
+    res.render("signup");
   });
 
   // Route for getting some data about our user to be used client side
