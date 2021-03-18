@@ -2,7 +2,7 @@
 const db = require("../models");
 const passport = require("../config/passport");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -90,4 +90,13 @@ module.exports = function(app) {
       });
     }
   });
+
+  // Route for updating the Character stats with ingame stats.
+  app.put("api/game", (req, res) => {
+    db.Character.update(req.body.hp, req.body.attack, req.body.xp, req.body.lvl, {
+      where: {
+        id: req.body.id
+      }
+    }).then((dbCharacter) => res.json(dbCharacter))
+  })
 };
