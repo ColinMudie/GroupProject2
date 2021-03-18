@@ -1,3 +1,4 @@
+
 $(document).ready(() => {
 
   // When the signup button is clicked, we validate the character stats are not blank
@@ -42,29 +43,19 @@ $(document).ready(() => {
     $("#alert").fadeIn(500);
   }
 });
-
 // --------------------------------------------------------------
+/* eslint-disable no-empty-function */
 window.onload = function() {
-    //start crafty
-    Crafty.init(50, 400, 320);
-    Crafty.canvas();
-  };
+  //start crafty
+  Crafty.init(50, 400, 320);
+  Crafty.canvas();
+};
 
-  Crafty.scene("charselect",function(){
+Crafty.scene("charselect", () => {});
 
-  })
+Crafty.scene("startscreen", () => {});
 
-  Crafty.scene("startscreen",function(){
+Crafty.scene("main", () => {});
 
-})
-
-
-Crafty.scene("main",function(){
-
-})
-
-Crafty.scene("endgame",function(){
-
-})
-
+Crafty.scene("endgame", () => {});
 
