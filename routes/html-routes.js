@@ -29,4 +29,8 @@ module.exports = function(app) {
   app.get("/members", isAuthenticated, (req, res) => {
     res.render("members", { title: "Member" });
   });
+
+  app.get("/game", isAuthenticated, (req, res) => {
+    res.render("game", { title: "Game" });
+  });
 };
