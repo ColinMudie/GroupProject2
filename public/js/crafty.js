@@ -1,6 +1,6 @@
 $(document).ready(() => {
   // When the signup button is clicked, we validate the character stats are not blank
-  save.on("click", event => {
+  $(".saveButton").on("click", event => {
     event.preventDefault();
     const characterData = {
       hp: hpInput.val().trim(),
