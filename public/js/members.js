@@ -42,23 +42,25 @@ const getCharacters = data => {
     });
 };
 $(".character").on("click", function() {
-  $.get("/api/user_data").then(data => {
-    $(".member-name").text(data.email);
-    getCharacters(data);
-    const dataId = parseInt($(this).attr("data-id"));
-    // console.log(test);
-    console.log(dataId);
-    console.log(allCharacters[dataId].hp);
-    currentCharacter = {
-      id: allCharacters[dataId].id,
-      class: allCharacters[dataId].class,
-      hp: allCharacters[dataId].hp,
-      lvl: allCharacters[dataId].lvl,
-      attack: allCharacters[dataId].attack,
-      xp: allCharacters[dataId].xp,
-      UserId: allCharacters[dataId].UserId
-    };
-    console.log(currentCharacter);
-    // return currentCharacter;
-  });
+  $.get("/api/user_data")
+    .then(data => {
+      $(".member-name").text(data.email);
+      getCharacters(data);
+      const dataId = parseInt($(this).attr("data-id"));
+      // console.log(test);
+      console.log(dataId);
+      console.log(allCharacters[dataId].hp);
+      currentCharacter = {
+        id: allCharacters[dataId].id,
+        class: allCharacters[dataId].class,
+        hp: allCharacters[dataId].hp,
+        lvl: allCharacters[dataId].lvl,
+        attack: allCharacters[dataId].attack,
+        xp: allCharacters[dataId].xp,
+        UserId: allCharacters[dataId].UserId
+      };
+      console.log(currentCharacter);
+      // return currentCharacter;
+    })
+    .then(window.location.replace("/game"));
 });
