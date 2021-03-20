@@ -87,14 +87,17 @@ function preload ()
   this.load.image('boss', 'assets/boss.png');
   this.load.image('mainmap', 'assets/mainmap.png');
   this.load.spritesheet('sprites', 
-      'assets/sprites.png',
+      'assets/newSprites.png',
       { frameWidth: 32, frameHeight: 48 }
   );
 }
 function create ()
 {
   this.add.image(400, 300, "boss");
+  this.add.image(400, 300, "sprites");
+
 }
 function update ()
 {
 }
+
