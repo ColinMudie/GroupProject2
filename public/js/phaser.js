@@ -56,17 +56,48 @@ $(document).ready(() => {
 // eslint-disable-next-line no-unused-vars
 const character = this.currentCharacter;
 
-window.onload = function() {
-  //start crafty
-  console.log(this.currentCharacter);
-  Crafty.init(50, 400, 320);
-  Crafty.canvas();
+// window.onload = function() {
+//   //start crafty
+//   console.log(this.currentCharacter);
+//   Crafty.init(50, 400, 320);
+//   Crafty.canvas();
+// };
+
+// Crafty.scene("charselect", () => {});
+
+// Crafty.scene("startscreen", () => {});
+
+// Crafty.scene("main", () => {});
+
+// Crafty.scene("endgame", () => {});
+
+var config = {
+  type: Phaser.AUTO,
+  width: 800,
+  height: 600,
+  scene: {
+      preload: preload,
+      create: create,
+      update: update
+  }
 };
+var game = new Phaser.Game(config);
+function preload ()
+{
+  this.load.image('boss', 'assets/boss.png');
+  this.load.image('mainmap', 'assets/mainmap.png');
+  this.load.spritesheet('sprites', 
+      'assets/newSprites.png',
+      { frameWidth: 32, frameHeight: 48 }
+  );
+}
+function create ()
+{
+  this.add.image(400, 300, "boss");
+  this.add.image(400, 300, "sprites");
 
-Crafty.scene("charselect", () => {});
+}
+function update ()
+{
+}
 
-Crafty.scene("startscreen", () => {});
-
-Crafty.scene("main", () => {});
-
-Crafty.scene("endgame", () => {});
