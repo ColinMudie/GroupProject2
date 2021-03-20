@@ -1,6 +1,4 @@
-
 $(document).ready(() => {
-
   // When the signup button is clicked, we validate the character stats are not blank
   save.on("click", event => {
     event.preventDefault();
@@ -11,11 +9,21 @@ $(document).ready(() => {
       lvl: lvlInput.val().trim()
     };
 
-    if (!characterData.hp || !characterData.attack || !characterData.xp || !characterData.lvl) {
+    if (
+      !characterData.hp ||
+      !characterData.attack ||
+      !characterData.xp ||
+      !characterData.lvl
+    ) {
       return;
     }
     // If we have valid stats, run the saveCharacter function
-    saveCharacter(characterData.hp, characterData.attack, characterData.xp, characterData.lvl);
+    saveCharacter(
+      characterData.hp,
+      characterData.attack,
+      characterData.xp,
+      characterData.lvl
+    );
     hpInput.val("");
     attackInput.val("");
     xpInput.val("");
@@ -24,7 +32,7 @@ $(document).ready(() => {
 
   // Does a post to the game route. If successful, send a success message
   // Otherwise we log any errors
-  function saveCharacter(hp,attack,xp,lvl) {
+  function saveCharacter(hp, attack, xp, lvl) {
     $.put("/api/game", {
       hp: hp,
       attack: attack,
@@ -62,4 +70,3 @@ Crafty.scene("startscreen", () => {});
 Crafty.scene("main", () => {});
 
 Crafty.scene("endgame", () => {});
-
