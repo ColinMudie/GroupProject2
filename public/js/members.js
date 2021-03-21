@@ -1,13 +1,6 @@
+/* eslint-disable vars-on-top */
+/* eslint-disable no-var */
 // eslint-disable-next-line no-var
-var currentCharacter = {
-  id: "",
-  class: "",
-  hp: "",
-  lvl: "",
-  attack: "",
-  xp: "",
-  UserId: ""
-};
 
 $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
@@ -47,10 +40,7 @@ $(".character").on("click", function() {
       $(".member-name").text(data.email);
       getCharacters(data);
       const dataId = parseInt($(this).attr("data-id"));
-      // console.log(test);
-      console.log(dataId);
-      console.log(allCharacters[dataId].hp);
-      currentCharacter = {
+      let currentCharacter = {
         id: allCharacters[dataId].id,
         class: allCharacters[dataId].class,
         hp: allCharacters[dataId].hp,
@@ -59,8 +49,10 @@ $(".character").on("click", function() {
         xp: allCharacters[dataId].xp,
         UserId: allCharacters[dataId].UserId
       };
-      console.log(currentCharacter);
-      // return currentCharacter;
+      localStorage.setItem(
+        "currentCharacter",
+        JSON.stringify(currentCharacter)
+      );
     })
     .then(window.location.replace("/game"));
 });
