@@ -61,6 +61,13 @@ $(document).ready(() => {
     $("#alert").fadeIn(500);
   }
 });
+
+$(".characterButton").on("click", event => {
+  event.preventDefault();
+  window.location.replace("/members");
+});
+
+
 console.log(currentCharacter);
 // --------------------------------------------------------------
 /* eslint-disable no-empty-function */
