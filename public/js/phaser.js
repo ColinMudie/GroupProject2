@@ -101,12 +101,18 @@ const config = {
 };
 const game = new Phaser.Game(config);
 function preload() {
+ 
   this.load.image("boss", "assets/boss.png");
   this.load.spritesheet("dude", "assets/dude.png", {
     frameWidth: 32,
     frameHeight: 48
   });
-  this.load.image("mainmap", "assets/mainmap.png");
+  this.load.image("mainmap", "assets/mainmap.png"); 
+  //this.load.image("tiles", "assets/gentle forest, moonlight palette.png")
+  //this.load.image("tiles", "assets/magicspell_spritesheet.png")
+  //this.load.image("tiles", "assets/7_firespin_spritesheet.png")
+  //this.load.image("tiles","assets/11_fire_spritesheet.png")
+  //this.load.tilemapTiledJSON("mainarea", "assets/map2.json");
   this.load.spritesheet("sprites", "assets/newSprites.png", {
     frameWidth: 26,
     frameHeight: 36
@@ -114,6 +120,16 @@ function preload() {
 }
 
 function create() {
+  
+  // const mainAreaTilemap = this.make.tilemap({ key: "mainarea" }); 
+  // mainAreaTilemap.addTilesetImage("Main Area", "tiles");
+  // for (let i = 0; i < mainAreaTilemap.layers.length; i++) {
+  //   const layer = mainAreaTilemap
+  //     .createLayer(i, "Main Area", 0, 0)
+  //   layer.setDepth(i);
+  //   layer.scale = 3;}
+  
+  
   this.add.image(400, 300, "mainmap");
   // this.add.image(400, 300, "sprites");
   // this.add.image(400, 300, "dude");
