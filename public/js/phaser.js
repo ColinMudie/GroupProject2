@@ -121,7 +121,7 @@ function preload() {
 
 function create() {
   
-  // const mainAreaTilemap = this.make.tilemap({ key: "mainarea" });
+  // const mainAreaTilemap = this.make.tilemap({ key: "mainarea" }); 
   // mainAreaTilemap.addTilesetImage("Main Area", "tiles");
   // for (let i = 0; i < mainAreaTilemap.layers.length; i++) {
   //   const layer = mainAreaTilemap
