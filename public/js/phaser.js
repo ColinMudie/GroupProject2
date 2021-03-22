@@ -7,6 +7,7 @@ let xleft;
 let xright;
 let xturn;
 let xfacing;
+let spawnSprite;
 $(document).ready(() => {
   // When the signup button is clicked, we validate the character stats are not blank
   $(".saveButton").on("click", event => {
@@ -81,6 +82,41 @@ let player;
 // Crafty.scene("main", () => {});
 
 // Crafty.scene("endgame", () => {});
+//determining which sprite
+switch (currentCharacter.class) {
+  case "Warrior":
+    xup = { start: 36, end: 38 };
+    xdown = { start: 0, end: 2 };
+    xleft = { start: 12, end: 14 };
+    xright = { start: 24, end: 26 };
+    xturn = [37, 1, 13, 25];
+    spawnSprite = [1];
+    break;
+  case "Huntress":
+    xup = { start: 45, end: 47 };
+    xdown = { start: 9, end: 11 };
+    xleft = { start: 21, end: 23 };
+    xright = { start: 33, end: 35 };
+    xturn = [46, 10, 22, 34];
+    spawnSprite = [10];
+    break;
+  case "Archer":
+    xup = { start: 42, end: 44 };
+    xdown = { start: 6, end: 8 };
+    xleft = { start: 18, end: 20 };
+    xright = { start: 30, end: 32 };
+    xturn = [43, 7, 19, 31];
+    spawnSprite = [7];
+    break;
+  case "Mage":
+    xup = { start: 90, end: 92 };
+    xdown = { start: 54, end: 56 };
+    xleft = { start: 66, end: 68 };
+    xright = { start: 78, end: 80 };
+    xturn = [91, 55, 67, 79];
+    spawnSprite = [55];
+    break;
+}
 
 const config = {
   type: Phaser.AUTO,
@@ -133,43 +169,12 @@ function create() {
   this.add.image(400, 300, "mainmap");
   // this.add.image(400, 300, "sprites");
   // this.add.image(400, 300, "dude");
-  player = this.physics.add.sprite(100, 450, "sprites");
+  player = this.physics.add.sprite(100, 450, "sprites", spawnSprite);
 
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
-  //determining which sprite
-
-  switch (currentCharacter.class) {
-    case "Warrior":
-      xup = { start: 36, end: 38 };
-      xdown = { start: 0, end: 2 };
-      xleft = { start: 12, end: 14 };
-      xright = { start: 24, end: 26 };
-      xturn = [37, 1, 13, 25];
-      break;
-    case "Huntress":
-      xup = { start: 45, end: 47 };
-      xdown = { start: 9, end: 11 };
-      xleft = { start: 21, end: 23 };
-      xright = { start: 33, end: 35 };
-      xturn = [46, 10, 22, 34];
-      break;
-    case "Archer":
-      xup = { start: 42, end: 44 };
-      xdown = { start: 6, end: 8 };
-      xleft = { start: 18, end: 20 };
-      xright = { start: 30, end: 32 };
-      xturn = [43, 7, 19, 31];
-      break;
-    case "Mage":
-      xup = { start: 90, end: 92 };
-      xdown = { start: 54, end: 56 };
-      xleft = { start: 66, end: 68 };
-      xright = { start: 78, end: 80 };
-      xturn = [91, 55, 67, 79];
-      break;
-  }
+  
   //move animation
   this.anims.create({
     key: "up",
