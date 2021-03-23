@@ -67,6 +67,13 @@ $(".characterButton").on("click", event => {
   window.location.replace("/members");
 });
 
+// $(".logoutButton").on("click", event => {
+//   event.preventDefault();
+//   $.get("/logout", (req, res) => {
+//     req.logout();
+//     res.render("login");
+//   });
+// });
 
 console.log(currentCharacter);
 // --------------------------------------------------------------
