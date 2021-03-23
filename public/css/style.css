@@ -1,19 +1,19 @@
-
-
-form.signup {
-  margin-top: 50px;
-  background-color:cornflowerblue;
-  
-}
 .container {
   background-image: url(https://cdna.artstation.com/p/assets/images/images/007/382/326/large/nastya-friday-game-background-3.jpg?1505758854);
   border-radius: 45px;
   width: 95%;
-  height: 100%;
+  
   }
+.form-group {
+  font-size: large;
+  color: white;
+}
+
 #email-input {
   color:black;
 } 
+
+
 
 h2 {
   font-style: italic;
@@ -24,28 +24,34 @@ h2 {
 }
 
 .warrior {
-  color: darkgoldenrod;
+  color: mediumseagreen;
   font-size: x-large;
   font-style: italic;
   font-family: fantasy;
 }
+
 .huntress {
-  color: darkgoldenrod;
+  color: mediumseagreen;
   font-size: x-large;
   font-style: italic;
   font-family: fantasy;
 }
 .archer {
-  color: darkgoldenrod;
+  color: mediumseagreen;
   font-size: x-large;
   font-style: italic;
   font-family: fantasy;
 }
 .mage {
-  color: darkgoldenrod;
+  color: mediumseagreen;
   font-size: x-large;
   font-style: italic;
   font-family: fantasy;
+}
+
+.card-text {
+  font-size: large;
+  color: white;
 }
 
 form.login
