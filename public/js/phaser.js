@@ -8,42 +8,28 @@ let xright;
 let xturn;
 let xfacing;
 let spawnSprite;
+const stepLimit = 100;
+const randX = () => Math.random() * 800;
+const randY = () => Math.random() * 600;
 $(document).ready(() => {
   // When the signup button is clicked, we validate the character stats are not blank
   $(".saveButton").on("click", event => {
-    event.preventDefault();
-    const characterData = {
-      hp: hpInput.val().trim(),
-      attack: attackInput.val().trim(),
-      xp: xpInput.val().trim(),
-      lvl: lvlInput.val().trim()
-    };
-
-    if (
-      !characterData.hp ||
-      !characterData.attack ||
-      !characterData.xp ||
-      !characterData.lvl
-    ) {
-      return;
-    }
+    console.log("saveButton Clicked");
     // If we have valid stats, run the saveCharacter function
     saveCharacter(
-      characterData.hp,
-      characterData.attack,
-      characterData.xp,
-      characterData.lvl
+      currentCharacter.UserId,
+      currentCharacter.id,
+      currentCharacter.hp,
+      currentCharacter.attack,
+      currentCharacter.xp,
+      currentCharacter.lvl
     );
-    hpInput.val("");
-    attackInput.val("");
-    xpInput.val("");
-    lvlInput.val("");
   });
 
   // Does a post to the game route. If successful, send a success message
   // Otherwise we log any errors
-  function saveCharacter(hp, attack, xp, lvl) {
-    $.put("/api/game", {
+  function saveCharacter(UserId, id, hp, attack, xp, lvl) {
+    $.post(`/api/game/${UserId}/${id}`, {
       hp: hp,
       attack: attack,
       xp: xp,
@@ -68,21 +54,6 @@ console.log(currentCharacter);
 const character = this.currentCharacter;
 
 let player;
-// window.onload = function() {
-//   //start crafty
-//   console.log(this.currentCharacter);
-//   Crafty.init(50, 400, 320);
-//   Crafty.canvas();
-// };
-
-// Crafty.scene("charselect", () => {});
-
-// Crafty.scene("startscreen", () => {});
-
-// Crafty.scene("main", () => {});
-
-// Crafty.scene("endgame", () => {});
-//determining which sprite
 switch (currentCharacter.class) {
   case "Warrior":
     xup = { start: 36, end: 38 };
@@ -117,7 +88,6 @@ switch (currentCharacter.class) {
     spawnSprite = [55];
     break;
 }
-
 const config = {
   type: Phaser.AUTO,
   width: 800,
@@ -137,18 +107,12 @@ const config = {
 };
 const game = new Phaser.Game(config);
 function preload() {
- 
   this.load.image("boss", "assets/boss.png");
   this.load.spritesheet("dude", "assets/dude.png", {
     frameWidth: 32,
     frameHeight: 48
   });
-  this.load.image("mainmap", "assets/mainmap.png"); 
-  //this.load.image("tiles", "assets/gentle forest, moonlight palette.png")
-  //this.load.image("tiles", "assets/magicspell_spritesheet.png")
-  //this.load.image("tiles", "assets/7_firespin_spritesheet.png")
-  //this.load.image("tiles","assets/11_fire_spritesheet.png")
-  //this.load.tilemapTiledJSON("mainarea", "assets/map2.json");
+  this.load.image("mainmap", "assets/map2.png");
   this.load.spritesheet("sprites", "assets/newSprites.png", {
     frameWidth: 26,
     frameHeight: 36
@@ -156,26 +120,26 @@ function preload() {
 }
 
 function create() {
-  
-  // const mainAreaTilemap = this.make.tilemap({ key: "mainarea" }); 
-  // mainAreaTilemap.addTilesetImage("Main Area", "tiles");
-  // for (let i = 0; i < mainAreaTilemap.layers.length; i++) {
-  //   const layer = mainAreaTilemap
-  //     .createLayer(i, "Main Area", 0, 0)
-  //   layer.setDepth(i);
-  //   layer.scale = 3;}
-  
-  
   this.add.image(400, 300, "mainmap");
-  // this.add.image(400, 300, "sprites");
-  // this.add.image(400, 300, "dude");
   player = this.physics.add.sprite(100, 450, "sprites", spawnSprite);
-
+  enemy = this.physics.add
+    .sprite(randX(), randY(), "sprites", [52])
+    .setImmovable();
+  this.physics.add.collider(player, enemy, (player, enemy) => {
+    //if player touches enemy
+    if (player.body.touching) {
+      console.log("yes");
+      console.log(randX());
+      console.log(currentCharacter);
+      enemy.setPosition(randX(), randY());
+      currentCharacter.lvl++;
+      console.log(currentCharacter);
+    }
+  });
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
-
-  
-  //move animation
+  enemy.setCollideWorldBounds(true);
+  //Player move animation
   this.anims.create({
     key: "up",
     frames: this.anims.generateFrameNumbers("sprites", xup),
@@ -222,6 +186,51 @@ function create() {
   this.anims.create({
     key: "stopRight",
     frames: [{ key: "sprites", frame: xturn[3] }],
+    frameRate: 20
+  });
+  //Enemy Animations
+  this.anims.create({
+    key: "aiUp",
+    frames: this.anims.generateFrameNumbers("sprites", { start: 87, end: 89 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: "aiDown",
+    frames: this.anims.generateFrameNumbers("sprites", { start: 51, end: 53 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: "aiLeft",
+    frames: this.anims.generateFrameNumbers("sprites", { start: 63, end: 65 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: "aiRight",
+    frames: this.anims.generateFrameNumbers("sprites", { start: 75, end: 77 }),
+    frameRate: 10,
+    repeat: -1
+  });
+  this.anims.create({
+    key: "aiStopUp",
+    frames: [{ key: "sprites", frame: 88 }],
+    frameRate: 20
+  });
+  this.anims.create({
+    key: "aiStopDown",
+    frames: [{ key: "sprites", frame: 52 }],
+    frameRate: 20
+  });
+  this.anims.create({
+    key: "aiStopLeft",
+    frames: [{ key: "sprites", frame: 64 }],
+    frameRate: 20
+  });
+  this.anims.create({
+    key: "aiStopRight",
+    frames: [{ key: "sprites", frame: 76 }],
     frameRate: 20
   });
   cursors = this.input.keyboard.createCursorKeys();

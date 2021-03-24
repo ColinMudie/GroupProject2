@@ -40,7 +40,7 @@ $(".character").on("click", function() {
       $(".member-name").text(data.email);
       getCharacters(data);
       const dataId = parseInt($(this).attr("data-id"));
-      let currentCharacter = {
+      const currentCharacter = {
         id: allCharacters[dataId].id,
         class: allCharacters[dataId].class,
         hp: allCharacters[dataId].hp,
