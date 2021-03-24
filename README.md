@@ -23,7 +23,7 @@ MAJC is a top-down RPG built using Phaser v3-- a javascript game framework used 
 
 **This data is saved in the database. Bcrypts module is used to hash the password to secure it.** 
 
-![login](public\assets\screenshoots\screen1.PNG)
+![login](public/assets/screenshoots/screen1.PNG)
 
 ---
     
@@ -33,7 +33,7 @@ MAJC is a top-down RPG built using Phaser v3-- a javascript game framework used 
 
 **This data is saved in the database. Users have info saved for each game session.**
 
-![dashboard](/public\assets\screenshoots\screen3.PNG)
+![dashboard](public/assets/screenshoots/screen3.PNG)
 
 ---
 - The Game
@@ -42,7 +42,7 @@ MAJC is a top-down RPG built using Phaser v3-- a javascript game framework used 
     - When character comes into contact with the enemy, the enemy will be pushed in a random X & Y position.
     - User can save progress and logout. 
 ---
-![game](public\assets\screenshoots\screen4.PNG)
+![game](public/assets/screenshoots/screen4.PNG)
 
 
 ---
