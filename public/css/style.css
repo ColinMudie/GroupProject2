@@ -2,8 +2,11 @@
   background-image: url(https://cdna.artstation.com/p/assets/images/images/007/382/326/large/nastya-friday-game-background-3.jpg?1505758854);
   border-radius: 45px;
   width: 95%;
+  padding-top: 30px;
+  padding-bottom: 200px;
   
   }
+
 .form-group {
   font-size: large;
   color: white;
@@ -18,33 +21,33 @@
 h2 {
   font-style: italic;
   color: darkgoldenrod;
-  font-size: xx-large;
+  font-size: 350%;
   font-style: italic;
   font-family: fantasy;
 }
 
 .warrior {
   color: mediumseagreen;
-  font-size: x-large;
+  font-size: 250%;
   font-style: italic;
   font-family: fantasy;
 }
 
 .huntress {
   color: mediumseagreen;
-  font-size: x-large;
+  font-size: 250%;
   font-style: italic;
   font-family: fantasy;
 }
 .archer {
   color: mediumseagreen;
-  font-size: x-large;
+  font-size: 250%;
   font-style: italic;
   font-family: fantasy;
 }
 .mage {
   color: mediumseagreen;
-  font-size: x-large;
+  font-size: 250%;
   font-style: italic;
   font-family: fantasy;
 }
