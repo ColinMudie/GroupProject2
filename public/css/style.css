@@ -1,4 +1,4 @@
-.container {
+.container-signup {
   background-image: url(https://cdna.artstation.com/p/assets/images/images/007/382/326/large/nastya-friday-game-background-3.jpg?1505758854);
   border-radius: 45px;
   width: 99%;
@@ -15,14 +15,7 @@
     
     }
 
-    .container-members {
-      background-image: url(https://cdna.artstation.com/p/assets/images/images/007/382/336/large/nastya-friday-game-background-4.jpg?1505758875);
-      border-radius: 45px;
-      width: 99%;
-      padding-top: 30px;
-      padding-bottom: 200px;
-      
-      }
+    
     
 
 .form-group {
@@ -49,32 +42,6 @@ h3 {
   font-style: italic;
   font-family: fantasy;
   
-}
-
-.warrior {
-  color: gold;
-  font-size: 250%;
-  font-style: italic;
-  font-family: fantasy;
-}
-
-.huntress {
-  color: gold;
-  font-size: 250%;
-  font-style: italic;
-  font-family: fantasy;
-}
-.archer {
-  color: gold;
-  font-size: 250%;
-  font-style: italic;
-  font-family: fantasy;
-}
-.mage {
-  color: gold;
-  font-size: 250%;
-  font-style: italic;
-  font-family: fantasy;
 }
 
 .card-text {
