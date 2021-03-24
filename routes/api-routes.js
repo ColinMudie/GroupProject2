@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
@@ -99,5 +100,40 @@ module.exports = function(app) {
         UserId: req.params.id
       }
     }).then(dbCharacterStats => res.json(dbCharacterStats));
+  });
+
+  app.get("/api/game/:UserId/:id", (req, res) => {
+    console.log(req);
+  });
+
+  app.post("/api/game/:UserId/:id", (req, res) => {
+    // console.log(res);
+    console.log(req.body);
+    console.log(req.body.xp);
+    db.Character.update(
+      {
+        xp: req.body.xp,
+        lvl: req.body.lvl,
+        attack: req.body.attack,
+        hp: req.body.hp
+      },
+      {
+        where: {
+          UserId: req.params.UserId,
+          id: req.params.id
+        }
+      }
+    );
+    //   res
+    //     .json({
+    //       xp: req.body.xp,
+    //       lvl: req.body.lvl,
+    //       attack: req.body.attack,
+    //       hp: req.body.hp
+    //     })
+    //     .then(data => {
+    //       console.log(data),
+
+    //     });
   });
 };

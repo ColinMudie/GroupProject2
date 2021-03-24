@@ -11,45 +11,25 @@ let spawnSprite;
 const stepLimit = 100;
 const randX = () => Math.random() * 800;
 const randY = () => Math.random() * 600;
-const characterData = {
-  hp: currentCharacter.hp,
-  attack: currentCharacter.attack,
-  xp: currentCharacter.xp,
-  lvl: currentCharacter.lvl,
-  class: currentCharacter.class,
-  id: currentCharacter.id
-};
 $(document).ready(() => {
   // When the signup button is clicked, we validate the character stats are not blank
   $(".saveButton").on("click", event => {
-    event.preventDefault();
-    
-
-    if (
-      !characterData.hp ||
-      !characterData.attack ||
-      !characterData.xp ||
-      !characterData.lvl
-    ) {
-      return;
-    }
+    console.log("saveButton Clicked");
     // If we have valid stats, run the saveCharacter function
     saveCharacter(
-      characterData.hp,
-      characterData.attack,
-      characterData.xp,
-      characterData.lvl
+      currentCharacter.UserId,
+      currentCharacter.id,
+      currentCharacter.hp,
+      currentCharacter.attack,
+      currentCharacter.xp,
+      currentCharacter.lvl
     );
-    hpInput.val("");
-    attackInput.val("");
-    xpInput.val("");
-    lvlInput.val("");
   });
 
   // Does a post to the game route. If successful, send a success message
   // Otherwise we log any errors
-  function saveCharacter(hp, attack, xp, lvl) {
-    $.put("/api/game", {
+  function saveCharacter(UserId, id, hp, attack, xp, lvl) {
+    $.post(`/api/game/${UserId}/${id}`, {
       hp: hp,
       attack: attack,
       xp: xp,
@@ -67,20 +47,6 @@ $(document).ready(() => {
     $("#alert").fadeIn(500);
   }
 });
-
-$(".characterButton").on("click", event => {
-  event.preventDefault();
-  window.location.replace("/members");
-});
-
-// $(".logoutButton").on("click", event => {
-//   event.preventDefault();
-//   $.get("/logout", (req, res) => {
-//     req.logout();
-//     res.render("login");
-//   });
-// });
-
 console.log(currentCharacter);
 // --------------------------------------------------------------
 /* eslint-disable no-empty-function */
@@ -88,21 +54,6 @@ console.log(currentCharacter);
 const character = this.currentCharacter;
 
 let player;
-// window.onload = function() {
-//   //start crafty
-//   console.log(this.currentCharacter);
-//   Crafty.init(50, 400, 320);
-//   Crafty.canvas();
-// };
-
-// Crafty.scene("charselect", () => {});
-
-// Crafty.scene("startscreen", () => {});
-
-// Crafty.scene("main", () => {});
-
-// Crafty.scene("endgame", () => {});
-//determining which sprite
 switch (currentCharacter.class) {
   case "Warrior":
     xup = { start: 36, end: 38 };
@@ -162,11 +113,6 @@ function preload() {
     frameHeight: 48
   });
   this.load.image("mainmap", "assets/map2.png");
-  //this.load.image("tiles", "assets/gentle forest, moonlight palette.png")
-  //this.load.image("tiles", "assets/magicspell_spritesheet.png")
-  //this.load.image("tiles", "assets/7_firespin_spritesheet.png")
-  //this.load.image("tiles","assets/11_fire_spritesheet.png")
-  //this.load.tilemapTiledJSON("mainarea", "assets/map2.json");
   this.load.spritesheet("sprites", "assets/newSprites.png", {
     frameWidth: 26,
     frameHeight: 36
@@ -174,40 +120,26 @@ function preload() {
 }
 
 function create() {
-  // const mainAreaTilemap = this.make.tilemap({ key: "mainarea" });
-  // mainAreaTilemap.addTilesetImage("Main Area", "tiles");
-  // for (let i = 0; i < mainAreaTilemap.layers.length; i++) {
-  //   const layer = mainAreaTilemap
-  //     .createLayer(i, "Main Area", 0, 0)
-  //   layer.setDepth(i);
-  //   layer.scale = 3;}
   this.add.image(400, 300, "mainmap");
-  // this.add.image(400, 300, "sprites");
-  // this.add.image(400, 300, "dude");
   player = this.physics.add.sprite(100, 450, "sprites", spawnSprite);
   enemy = this.physics.add
     .sprite(randX(), randY(), "sprites", [52])
     .setImmovable();
   this.physics.add.collider(player, enemy, (player, enemy) => {
+    //if player touches enemy
     if (player.body.touching) {
       console.log("yes");
       console.log(randX());
-      console.log(characterData);
+      console.log(currentCharacter);
       enemy.setPosition(randX(), randY());
-      characterData.lvl++;
-      console.log(characterData);
-
-      // enemy.destroy();
-      // enemy = this.physics.add.sprite(randX, randY, "sprites", [52]);
+      currentCharacter.lvl++;
+      console.log(currentCharacter);
     }
   });
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
-  // enemy.body.setVelocityX = Phaser.Math.Between(125, 175);
-  // enemy.stepCount = Phaser.Math.Between(0, stepLimit);
   enemy.setCollideWorldBounds(true);
-  //move animation
-  // this.physics.add.collider(player, enemy, enemy.setPosition(randX, randY));
+  //Player move animation
   this.anims.create({
     key: "up",
     frames: this.anims.generateFrameNumbers("sprites", xup),
@@ -304,10 +236,6 @@ function create() {
   cursors = this.input.keyboard.createCursorKeys();
 }
 function update() {
-  // if (collider) {
-  //   enemy.setPosition(randX, randY);
-  //   console.log("no");
-  // }
   if (cursors.left.isDown) {
     player.setVelocityX(-160);
     player.anims.play("left", true);
@@ -346,11 +274,4 @@ function update() {
   if (cursors.up.isDown && player.body.touching.down) {
     player.setVelocityY(-330);
   }
-  // Phaser.Physics.arcade.collider(
-  //   player,
-  //   enemy,
-  //   enemy.setPosition(randX, randY),
-  //   null,
-  //   this
-  // );
 }
